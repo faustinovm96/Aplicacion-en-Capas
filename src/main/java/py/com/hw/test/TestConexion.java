@@ -89,7 +89,7 @@ public class TestConexion {
             
             
         } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(TestConexion.class.getName()).log(Level.SEVERE, null, ex);
+            logger.trace("ALL");
         }
         
     }

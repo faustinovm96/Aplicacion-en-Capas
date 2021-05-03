@@ -14,7 +14,7 @@ import py.com.hw.dao.util.Conexion;
 import py.com.hw.modelo.Direccion;
 
 /**
- * Clase de Acceso a datos que implementa los métodos declarados en la Interfaz DireccionDao
+ * Clase que implementa la Interfaz DireccionDao
  * @version 1.0
  * @author Faustino Villasboa Martínez
  */
@@ -29,14 +29,13 @@ public class DireccionDaoMySQLImple implements DireccionDao{
     private static final String DELETE = "DELETE FROM direccion WHERE idDireccion = ?";
     
     private Connection connection = null;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
     private boolean estado;
     
     @Override
     public boolean save(Direccion direccion) throws SQLException{
         estado = false;
-        //connection = Conexion.getConnection();      
         
         try {
            //connection.setAutoCommit(false);
@@ -49,12 +48,10 @@ public class DireccionDaoMySQLImple implements DireccionDao{
             
             System.out.println("Pasa Por INSERT");
             estado = preparedStatement.executeUpdate() > 0;
-            //connection.getAutoCommit();
             //connection.commit();         
         } catch (SQLException e) {
             e.printStackTrace();
             //connection.rollback();
-            //logger.fatal("Yupii");
         } finally{
             preparedStatement.close();
             connection.close();
@@ -66,7 +63,6 @@ public class DireccionDaoMySQLImple implements DireccionDao{
     @Override
     public boolean update(Direccion direccion) throws SQLException{
         estado = false;
-        //connection = Conexion.getConnection();
         
         try {
             connection.setAutoCommit(false);
@@ -96,7 +92,6 @@ public class DireccionDaoMySQLImple implements DireccionDao{
     @Override
     public boolean delete(Direccion direccion) throws SQLException{
         estado = false;
-        //connection = Conexion.getConnection();
         
         try {
             //connection.setAutoCommit(false);
@@ -119,7 +114,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
     @Override
     public List<Direccion> findAll() throws SQLException{
         estado = false;
-       connection = Conexion.getInstance().getConnection();
+        connection = Conexion.getInstance().getConnection();
         List<Direccion> listaDirecciones = new ArrayList<Direccion>();
                 
         try {
@@ -150,7 +145,6 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         Direccion direccion = null;
         
         try {
-            //connection = Conexion.getConnection();
             preparedStatement = connection.prepareCall(SELECT);
             preparedStatement.setInt(1, idDireccion);           
             resultSet = preparedStatement.executeQuery();
@@ -167,7 +161,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
                 direccion.setBarrioComp(barrio);
                 direccion.setIdDireccion(resultSet.getInt("idDireccion"));
             }      
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally{
            preparedStatement.close();

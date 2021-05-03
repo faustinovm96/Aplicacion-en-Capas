@@ -18,14 +18,15 @@ public class Conexion {
 
     private static Conexion instance;
     private Connection connection;
-    private String url = "jdbc:mysql://localhost/test?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private String username = "root";
-    private String password = "holamundo96";
+    private static final String URL = "jdbc:mysql://localhost/test?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "holamundo96";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 
     private Conexion() throws SQLException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection(url, username, password);
+            Class.forName(DRIVER);
+            this.connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException ex) {
             System.out.println("Something is wrong with the DB connection String : " + ex.getMessage());
         }
