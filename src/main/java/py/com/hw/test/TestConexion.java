@@ -17,6 +17,7 @@ import py.com.hw.dao.DireccionDao;
 import py.com.hw.dao.mysql.jdbc.ClienteDaoMySQLImple;
 import py.com.hw.dao.mysql.jdbc.DireccionDaoMySQLImple;
 import py.com.hw.dao.util.Conexion;
+import py.com.hw.gui.ClienteFrm;
 import py.com.hw.modelo.Cliente;
 import py.com.hw.modelo.Direccion;
 
@@ -29,7 +30,9 @@ public class TestConexion {
     private static final Logger logger = LogManager.getLogger(TestConexion.class);
     
     public static void main(String[] args) {
-        try {
+           ClienteFrm formulario = new ClienteFrm();
+           formulario.setVisible(true);
+           formulario.setLocationRelativeTo(null);
             /*
             Direccion direccion = new Direccion();     
             */
@@ -61,7 +64,7 @@ public class TestConexion {
             //int filas = testDireccionDao.save(direccion);
             
             //System.out.println("Final del programa, filas afectadas: "+ filas);
-            
+            /*
             Direccion direccion = new Direccion();
             direccion.setCallePrincipal("Valle Yoa");
             direccion.setCalleTransversal("Tape Tuya");
@@ -84,7 +87,7 @@ public class TestConexion {
             ClienteDao cliClienteDao = new ClienteDaoMySQLImple();
             cliClienteDao.save(c);
             
-            System.out.println("FINAL DEL PROGRAMA");
+            System.out.println("FINAL DEL PROGRAMA");*/
  /*           
             Direccion direccion1 = new Direccion();
             
@@ -107,11 +110,7 @@ public class TestConexion {
             direccion = testDireccionDao.findById(new Integer(13));
             
             System.out.println("Objeto Recuperado: "+ direccion);*/
-            
-            
-        } catch (SQLException ex) {
-            logger.trace("ALL");
-        }
+
         
     }
 }
