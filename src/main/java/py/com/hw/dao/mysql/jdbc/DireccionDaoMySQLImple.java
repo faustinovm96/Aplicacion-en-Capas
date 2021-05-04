@@ -20,17 +20,18 @@ import py.com.hw.modelo.Direccion;
  */
 public class DireccionDaoMySQLImple implements DireccionDao{
     
-    private static final Logger logger = LogManager.getLogger(DireccionDaoMySQLImple.class);
+    //private static final Logger logger = LogManager.getLogger(DireccionDaoMySQLImple.class);
     
     private static final String INSERT = "INSERT INTO direccion (callePrincipal, calleTransversal, barrioComp, nroCasa) VALUES (?,?,?,?)";
     private static final String UPDATE = "UPDATE direccion SET callePrincipal=?, calleTransversal=?, barrioComp=?, nroCasa=? WHERE idDireccion=?";
-    private static final String SELECT = "SELECT * FROM direccion WHERE idDireccion = ?";    
+    private static final String SELECT = "SELECT * FROM direccion WHERE idDireccion = ?";  
+    private static final String SELECT_NRS = "SELECT * FROM direccion WHERE nroCasa = ?";  
     private static final String SELECT_ALL = "SELECT * FROM direccion";
     private static final String DELETE = "DELETE FROM direccion WHERE idDireccion = ?";
     
-    private Connection connection = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
+    private Connection connection;
+    private PreparedStatement preparedStatement;
+    private ResultSet resultSet;
     private boolean estado;
     
     @Override
@@ -65,7 +66,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         estado = false;
         
         try {
-            connection.setAutoCommit(false);
+            //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(UPDATE);
             preparedStatement.setString(1, direccion.getCallePrincipal());
@@ -75,7 +76,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
             preparedStatement.setInt(5, direccion.getIdDireccion());
             System.out.println("PASA POR UPDATE");
             estado  = preparedStatement.executeUpdate() > 0;
-            connection.commit();
+            //connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
@@ -114,10 +115,10 @@ public class DireccionDaoMySQLImple implements DireccionDao{
     @Override
     public List<Direccion> findAll() throws SQLException{
         estado = false;
-        connection = Conexion.getInstance().getConnection();
         List<Direccion> listaDirecciones = new ArrayList<Direccion>();
                 
         try {
+            connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SELECT_ALL);
             resultSet = preparedStatement.executeQuery();
             
@@ -141,10 +142,10 @@ public class DireccionDaoMySQLImple implements DireccionDao{
 
     @Override
     public Direccion findById(Integer idDireccion) throws SQLException {
-        connection = Conexion.getInstance().getConnection();
         Direccion direccion = null;
         
         try {
+            connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareCall(SELECT);
             preparedStatement.setInt(1, idDireccion);           
             resultSet = preparedStatement.executeQuery();
@@ -170,4 +171,35 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         return direccion;
     }
     
+    public Direccion findByNroCasa(Integer nroCasa) throws SQLException {
+        Direccion direccion = null;
+        
+        try {
+            connection = Conexion.getInstance().getConnection();
+            preparedStatement = connection.prepareCall(SELECT_NRS);
+            preparedStatement.setInt(1, nroCasa);           
+            resultSet = preparedStatement.executeQuery();
+            
+            if(resultSet.next()){
+                String calleP = resultSet.getString("callePrincipal");
+                String calleT = resultSet.getString("calleTransversal");
+                String barrio = resultSet.getString("barrioComp");
+                int nro = resultSet.getInt("nroCasa");
+                int idDireccion = resultSet.getInt("idDireccion");
+                
+                direccion = new Direccion();
+                direccion.setIdDireccion(idDireccion);
+                direccion.setCallePrincipal(calleP);
+                direccion.setCalleTransversal(calleT);
+                direccion.setBarrioComp(barrio);
+                direccion.setIdDireccion(resultSet.getInt("idDireccion"));
+            }      
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally{
+           preparedStatement.close();
+        }
+        
+        return direccion;
+    }
 }

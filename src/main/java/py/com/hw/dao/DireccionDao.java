@@ -1,6 +1,7 @@
 
 package py.com.hw.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 import py.com.hw.modelo.Direccion;
 
@@ -10,5 +11,5 @@ import py.com.hw.modelo.Direccion;
  * @version 1.0
  */
 public interface DireccionDao extends GenericDAO<Direccion, Integer>{
-    
+    public Direccion findByNroCasa(Integer nroCasa) throws SQLException;
 }
