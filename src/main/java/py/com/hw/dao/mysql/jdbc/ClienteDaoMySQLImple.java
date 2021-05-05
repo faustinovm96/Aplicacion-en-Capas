@@ -20,11 +20,11 @@ import py.com.hw.modelo.Cliente;
  */
 public class ClienteDaoMySQLImple implements ClienteDao{
     
-    private static final String INSERT = "INSERT INTO cliente (nombreRazonSocial, idDireccion, celular, email) VALUES (?,?,?,?)";
-    private static final String UPDATE = "UPDATE cliente SET nombreRazonSocial=?, idDireccion=?. celular=?, email=? WHERE idCliente=?";
-    private static final String DELETE = "DELETE FROM cliente WHERE idCliente=?";
-    private static final String SELECT = "SELECT * FROM cliente WHERE idCliente=?";
-    private static final String SELECT_ALL = "SELECT * FROM cliente";
+    private static final String INSERT_CLIENTE = "INSERT INTO cliente (nombreRazonSocial, idDireccion, celular, email) VALUES (?,?,?,?)";
+    private static final String UPDATE_CLIENTE = "UPDATE cliente SET nombreRazonSocial=?, idDireccion=?. celular=?, email=? WHERE idCliente=?";
+    private static final String DELETE_CLIENTE = "DELETE FROM cliente WHERE idCliente=?";
+    private static final String SELECT_CLIENTE = "SELECT * FROM cliente WHERE idCliente=?";
+    private static final String SELECT_ALL_CLIENTE = "SELECT * FROM cliente";
     
     private Connection connection;
     private PreparedStatement preparedStatement;
@@ -36,7 +36,7 @@ public class ClienteDaoMySQLImple implements ClienteDao{
         estado = false;
         try {
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement = connection.prepareStatement(INSERT_CLIENTE);
             preparedStatement.setString(1, cliente.getNombreRazonSocial());
             preparedStatement.setInt(2, cliente.getDireccion().getIdDireccion());
             preparedStatement.setString(3, cliente.getCelular());

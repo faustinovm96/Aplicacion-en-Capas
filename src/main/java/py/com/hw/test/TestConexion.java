@@ -26,16 +26,18 @@ import py.com.hw.modelo.Direccion;
  * @author Faustino Villasboa Martínez
  */
 public class TestConexion {
-    
+
     private static final Logger logger = LogManager.getLogger(TestConexion.class);
-    
+
     public static void main(String[] args) {
-           ClienteFrm formulario = new ClienteFrm();
-           formulario.setVisible(true);
-           formulario.setLocationRelativeTo(null);
-            /*
+        ClienteFrm formulario = new ClienteFrm();
+        formulario.setVisible(true);
+        formulario.setLocationRelativeTo(null);
+        logger.trace("Log level trace");
+        logger.debug("Log level debug");
+        /*
             Direccion direccion = new Direccion();     
-            */
+         */
  /*           System.out.println("Crear objeto direccion");
             Direccion direccion = new Direccion();
             direccion.setCallePrincipal("San Carlos");
@@ -49,9 +51,9 @@ public class TestConexion {
             boolean valor = testDireccionDao.save(direccion);
             
             System.out.println("Valor Devuelto: "+ valor);*/
-            
-            //System.out.println("Filas Afectadas: " + testDireccionDao.delete(direccion));
-            /*
+
+        //System.out.println("Filas Afectadas: " + testDireccionDao.delete(direccion));
+        /*
             List<Direccion> lista = new ArrayList<>();
             
             lista = testDireccionDao.findAll();
@@ -59,12 +61,10 @@ public class TestConexion {
             for(Direccion d: lista){
             System.out.println(d.getCallePrincipal());
             }*/
-            
-            /*        System.out.println("Recuperado:" + testDireccionDao.findDireccionById(1));*/
-            //int filas = testDireccionDao.save(direccion);
-            
-            //System.out.println("Final del programa, filas afectadas: "+ filas);
-            /*
+ /*        System.out.println("Recuperado:" + testDireccionDao.findDireccionById(1));*/
+        //int filas = testDireccionDao.save(direccion);
+        //System.out.println("Final del programa, filas afectadas: "+ filas);
+        /*
             Direccion direccion = new Direccion();
             direccion.setCallePrincipal("Valle Yoa");
             direccion.setCalleTransversal("Tape Tuya");
@@ -102,7 +102,7 @@ public class TestConexion {
             testDireccionDao.update(direccion1);
                
             System.out.println("Objeto Recuperado: "+ direccion1);*/
-            /*
+ /*
             direccion.setCallePrincipal("San Juan Bautista Necopuseno");
             
             testDireccionDao.update(direccion);
@@ -110,7 +110,5 @@ public class TestConexion {
             direccion = testDireccionDao.findById(new Integer(13));
             
             System.out.println("Objeto Recuperado: "+ direccion);*/
-
-        
     }
 }
