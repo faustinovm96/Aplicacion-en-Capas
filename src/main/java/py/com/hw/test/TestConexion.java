@@ -29,8 +29,8 @@ public class TestConexion {
 
     private static final Logger logger = LogManager.getLogger(TestConexion.class);
 
-    public static void main(String[] args) {
-        ClienteFrm formulario = new ClienteFrm();
+    public static void main(String[] args) throws SQLException {
+        /*ClienteFrm formulario = new ClienteFrm();
         formulario.setVisible(true);
         formulario.setLocationRelativeTo(null);
         logger.trace("Log level trace");
@@ -65,11 +65,7 @@ public class TestConexion {
         //int filas = testDireccionDao.save(direccion);
         //System.out.println("Final del programa, filas afectadas: "+ filas);
         /*
-            Direccion direccion = new Direccion();
-            direccion.setCallePrincipal("Valle Yoa");
-            direccion.setCalleTransversal("Tape Tuya");
-            direccion.setBarrioComp("San Jose");
-            direccion.setNroCasa(26);
+          
             
             DireccionDao direccionDao = new DireccionDaoMySQLImple();
             direccionDao.save(direccion);
@@ -77,11 +73,7 @@ public class TestConexion {
             Direccion direccion1 = new Direccion();
             direccion1 = direccionDao.findByNroCasa(direccion.getNroCasa());
             
-            Cliente c = new Cliente();
-            c.setNombreRazonSocial("Ramas confecciones");
-            c.setDireccion(direccion1);
-            c.setCelular("0971868761");
-            c.setEmail("ramasconfecciones123@gmail.com");
+            
             
             
             ClienteDao cliClienteDao = new ClienteDaoMySQLImple();
@@ -110,5 +102,21 @@ public class TestConexion {
             direccion = testDireccionDao.findById(new Integer(13));
             
             System.out.println("Objeto Recuperado: "+ direccion);*/
+        Direccion direccion = new Direccion();
+        direccion.setCallePrincipal("Avda Principal");
+        direccion.setCalleTransversal("Ita Potrero");
+//        direccion.setBarrioComp("Barrio Nueva Esperanza");
+        direccion.setNroCasa(40);
+        
+        Cliente c = new Cliente();
+        c.setNombreRazonSocial("Mercedes Ropas");
+        c.setDireccion(direccion);
+        c.setCelular("0972458963");
+        c.setEmail("mercedesmerceria@gmail.com");
+        
+        ClienteDao clienteDao = new ClienteDaoMySQLImple();
+        clienteDao.save(c);
+        
+        System.out.println("FINAL DEL PROGRAMA");
     }
 }

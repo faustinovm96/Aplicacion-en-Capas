@@ -22,12 +22,12 @@ public class DireccionDaoMySQLImple implements DireccionDao{
     
     //private static final Logger logger = LogManager.getLogger(DireccionDaoMySQLImple.class);
     
-    private static final String INSERT = "INSERT INTO direccion (callePrincipal, calleTransversal, barrioComp, nroCasa) VALUES (?,?,?,?)";
-    private static final String UPDATE = "UPDATE direccion SET callePrincipal=?, calleTransversal=?, barrioComp=?, nroCasa=? WHERE idDireccion=?";
-    private static final String SELECT = "SELECT * FROM direccion WHERE idDireccion = ?";  
-    private static final String SELECT_NRS = "SELECT * FROM direccion WHERE nroCasa = ?";  
-    private static final String SELECT_ALL = "SELECT * FROM direccion";
-    private static final String DELETE = "DELETE FROM direccion WHERE idDireccion = ?";
+    private static final String INSERT_DIRECCION = "INSERT INTO direccion (callePrincipal, calleTransversal, barrioComp, nroCasa) VALUES (?,?,?,?)";
+    private static final String UPDATE_DIRECCION = "UPDATE direccion SET callePrincipal=?, calleTransversal=?, barrioComp=?, nroCasa=? WHERE idDireccion=?";
+    private static final String SELECT_DIRECCION = "SELECT * FROM direccion WHERE idDireccion = ?";  
+    private static final String SELECT_NRS_DIRECCION = "SELECT * FROM direccion WHERE nroCasa = ?";  
+    private static final String SELECT_ALL_DIRECCION = "SELECT * FROM direccion";
+    private static final String DELETE_DIRECCION = "DELETE FROM direccion WHERE idDireccion = ?";
     
     private Connection connection;
     private PreparedStatement preparedStatement;
@@ -41,7 +41,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         try {
            //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(INSERT);
+            preparedStatement = connection.prepareStatement(INSERT_DIRECCION);
             preparedStatement.setString(1, direccion.getCallePrincipal());
             preparedStatement.setString(2, direccion.getCalleTransversal());
             preparedStatement.setString(3, direccion.getBarrioComp());
@@ -68,7 +68,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         try {
             //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement = connection.prepareStatement(UPDATE_DIRECCION);
             preparedStatement.setString(1, direccion.getCallePrincipal());
             preparedStatement.setString(2, direccion.getCalleTransversal());
             preparedStatement.setString(3, direccion.getBarrioComp());
@@ -97,7 +97,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         try {
             //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(DELETE);
+            preparedStatement = connection.prepareStatement(DELETE_DIRECCION);
             preparedStatement.setInt(1, direccion.getIdDireccion());
             
             estado = preparedStatement.executeUpdate() > 0;
@@ -119,7 +119,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
                 
         try {
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(SELECT_ALL);
+            preparedStatement = connection.prepareStatement(SELECT_ALL_DIRECCION);
             resultSet = preparedStatement.executeQuery();
             
             if (resultSet.next()) {
@@ -146,7 +146,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         
         try {
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareCall(SELECT);
+            preparedStatement = connection.prepareCall(SELECT_DIRECCION);
             preparedStatement.setInt(1, idDireccion);           
             resultSet = preparedStatement.executeQuery();
             
@@ -176,7 +176,7 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         
         try {
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareCall(SELECT_NRS);
+            preparedStatement = connection.prepareCall(SELECT_NRS_DIRECCION);
             preparedStatement.setInt(1, nroCasa);           
             resultSet = preparedStatement.executeQuery();
             
