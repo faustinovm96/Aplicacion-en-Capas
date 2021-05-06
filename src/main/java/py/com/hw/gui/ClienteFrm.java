@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import py.com.hw.dao.ClienteDao;
 import py.com.hw.dao.DireccionDao;
 import py.com.hw.dao.mysql.jdbc.ClienteDaoMySQLImple;
@@ -25,6 +26,7 @@ import py.com.hw.modelo.Direccion;
  */
 public class ClienteFrm extends javax.swing.JFrame {
 
+    private DefaultTableModel modelo;
     /**
      * Creates new form ClienteFrm
      */
@@ -346,14 +348,14 @@ public class ClienteFrm extends javax.swing.JFrame {
             direccion.setBarrioComp(txtBarrioComp.getText());
             direccion.setNroCasa(new Integer(txtNroCasa.getText()));
             
-            DireccionDao direccionDao = new DireccionDaoMySQLImple();
-            direccionDao.save(direccion);
+//            DireccionDao direccionDao = new DireccionDaoMySQLImple();
+//            direccionDao.save(direccion);
             
-            Direccion direccion1 = direccionDao.findByNroCasa(direccion.getNroCasa());
+//            Direccion direccion1 = direccionDao.findByNroCasa(direccion.getNroCasa());
             
             Cliente cliente = new Cliente();
             cliente.setNombreRazonSocial(txtNombreRazonSocial.getText());
-            cliente.setDireccion(direccion1);
+            cliente.setDireccion(direccion);
             cliente.setCelular(txtCelular.getText());
             cliente.setEmail(txtEmail.getText());
             
@@ -418,6 +420,36 @@ public class ClienteFrm extends javax.swing.JFrame {
         });
     }
     
+    public void llenarJTableNivel2(JTable jtNivel2)throws Exception{
+        try{
+            //Se crea un array para llenar las columnas de la tabla
+            ArrayList<Object> nombreColumna = new ArrayList<>();
+            nombreColumna.removeAll(nombreColumna);
+            nombreColumna.add("RUC");
+            nombreColumna.add("NombreRazonSocial");
+            nombreColumna.add("Celular");
+            nombreColumna.add("Email");
+            
+            //se rellena con cada una de las columnas al array
+            for(Object columna : nombreColumna){
+                modelo.addColumn(columna);
+            }
+            //Se rellena con el array de listar Nivel2       
+            //Nivel2 controlador, hace referencia a la clase donde se creó el método listar  
+//            for(Nivel2 DatoNivel : Nivel2Controlador.listar()){
+//                //Como dato nivel es de nivo nivel2, este puede acceder a los métodos get y set
+//                modelo.addRow(new Object[]{DatoNivel.getNombre(),
+//                                           DatoNivel.getCosto(),
+//                                           DatoNivel.getStock(),
+//                                          }); 
+//            }
+            //se actualiza la Tabla
+            jtNivel2.setModel(modelo);
+        //en caso de error
+        }catch(Exception sqle){
+            JOptionPane.showMessageDialog(null,"Error llenar JTable " + sqle);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
