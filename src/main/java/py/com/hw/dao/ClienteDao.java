@@ -9,7 +9,7 @@ import py.com.hw.modelo.Cliente;
 
 /**
  *
- * @author F996
+ * @author Faustino Villasboa Martínez
  */
 public interface ClienteDao extends GenericDAO<Cliente, Integer>{
     

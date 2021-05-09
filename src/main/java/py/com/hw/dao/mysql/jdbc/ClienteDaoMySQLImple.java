@@ -14,7 +14,7 @@ import py.com.hw.modelo.Cliente;
 
 /**
  *
- * @author F996
+ * @author Faustino Villasboa Martínez
  */
 public class ClienteDaoMySQLImple implements ClienteDao {
 
@@ -26,8 +26,8 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     @Override
     public boolean save(Cliente cliente) throws SQLException {
         estado = false;
-        //PreparedStatement preparedStatement1;
         int idGenerado = 0;
+        
         try {
             connection = Conexion.getInstance().getConnection();
 
@@ -70,7 +70,6 @@ public class ClienteDaoMySQLImple implements ClienteDao {
         estado = false;
 
         try {
-            //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(CRUDConstants.UPDATE_CLIENTE);
             preparedStatement.setString(1, cliente.getNombreRazonSocial());
@@ -78,16 +77,12 @@ public class ClienteDaoMySQLImple implements ClienteDao {
             preparedStatement.setString(3, cliente.getEmail());
             preparedStatement.setInt(4, cliente.getIdCliente());
             
-            //preparedStatement.setInt(5, direccion.getIdDireccion());
             System.out.println("PASA POR UPDATE");
             estado = preparedStatement.executeUpdate() > 0;
-            //connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
-            //connection.rollback();
         } finally {
             preparedStatement.close();
-            //Conexion.close(connection);
             connection.close();
             System.out.println("Conexion Cerrada UPDATE");
         }
@@ -101,16 +96,13 @@ public class ClienteDaoMySQLImple implements ClienteDao {
         estado = false;
 
         try {
-            //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(CRUDConstants.DELETE_CLIENTE);
             preparedStatement.setInt(1, a.getIdCliente());
 
             estado = preparedStatement.executeUpdate() > 0;
-            //connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
-            //connection.rollback();
         } finally {
             preparedStatement.close();
         }
@@ -160,8 +152,6 @@ public class ClienteDaoMySQLImple implements ClienteDao {
                 String nombreRazonSocial = resultSet.getString("nombreRazonSocial");
                 String celular = resultSet.getString("celular");
                 String email = resultSet.getString("email");
-                //int idDireccion = resultSet.getInt("id_direccion");
-                //int nro = resultSet.getInt("nroCasa");
 
                 cliente = new Cliente();
                 cliente.setIdCliente(resultSet.getInt("idcliente"));

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author F996
+ * @author Faustino Villasboa Martínez
  */
 public interface GenericDAO<T, K> {
     

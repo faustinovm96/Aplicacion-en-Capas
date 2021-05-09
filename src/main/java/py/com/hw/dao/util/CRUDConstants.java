@@ -7,7 +7,7 @@ package py.com.hw.dao.util;
 
 /**
  *
- * @author F996
+ * @author Faustino Villasboa Martínez
  */
 public class CRUDConstants {
 

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author F996
+ * @author Faustino Villasboa Martínez
  */
 public class Principal {
 

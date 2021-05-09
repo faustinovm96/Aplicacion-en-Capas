@@ -24,7 +24,7 @@ public class Conexion {
             Class.forName(CRUDConstants.DRIVER);
             this.connection = DriverManager.getConnection(CRUDConstants.URL, CRUDConstants.USERNAME, CRUDConstants.PASSWORD);
         } catch (ClassNotFoundException ex) {
-            System.out.println("Something is wrong with the DB connection String : " + ex.getMessage());
+            System.out.println("Problema Ocurrido : " + ex.getMessage());
         }
     }
 

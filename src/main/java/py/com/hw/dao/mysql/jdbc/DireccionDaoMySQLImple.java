@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import py.com.hw.dao.DireccionDao;
 import py.com.hw.dao.util.Conexion;
 import py.com.hw.modelo.Direccion;
@@ -19,9 +17,7 @@ import py.com.hw.modelo.Direccion;
  * @author Faustino Villasboa Martínez
  */
 public class DireccionDaoMySQLImple implements DireccionDao{
-    
-    //private static final Logger logger = LogManager.getLogger(DireccionDaoMySQLImple.class);
-    
+        
     private static final String INSERT_DIRECCION = "INSERT INTO direccion (callePrincipal, calleTransversal, barrioComp, nroCasa) VALUES (?,?,?,?)";
     private static final String UPDATE_DIRECCION = "UPDATE direccion SET callePrincipal=?, calleTransversal=?, barrioComp=?, nroCasa=? WHERE idDireccion=?";
     private static final String SELECT_DIRECCION = "SELECT * FROM direccion WHERE idDireccion = ?";  
@@ -39,7 +35,6 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         estado = false;
         
         try {
-           //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(INSERT_DIRECCION);
             preparedStatement.setString(1, direccion.getCallePrincipal());
@@ -49,10 +44,8 @@ public class DireccionDaoMySQLImple implements DireccionDao{
             
             System.out.println("Pasa Por INSERT");
             estado = preparedStatement.executeUpdate() > 0;
-            //connection.commit();         
         } catch (SQLException e) {
             e.printStackTrace();
-            //connection.rollback();
         } finally{
             preparedStatement.close();
             connection.close();
@@ -66,7 +59,6 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         estado = false;
         
         try {
-            //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(UPDATE_DIRECCION);
             preparedStatement.setString(1, direccion.getCallePrincipal());
@@ -76,7 +68,6 @@ public class DireccionDaoMySQLImple implements DireccionDao{
             preparedStatement.setInt(5, direccion.getIdDireccion());
             System.out.println("PASA POR UPDATE");
             estado  = preparedStatement.executeUpdate() > 0;
-            //connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
             connection.rollback();
@@ -95,16 +86,13 @@ public class DireccionDaoMySQLImple implements DireccionDao{
         estado = false;
         
         try {
-            //connection.setAutoCommit(false);
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(DELETE_DIRECCION);
             preparedStatement.setInt(1, direccion.getIdDireccion());
             
             estado = preparedStatement.executeUpdate() > 0;
-            //connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
-            //connection.rollback();
         } finally{
             preparedStatement.close();
         }
