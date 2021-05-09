@@ -28,7 +28,7 @@ public class CRUDConstants {
 
     /**Queries SQL para la tabla clientes**/
     public static final String INSERT_CLIENTE = "INSERT INTO cliente (nombreRazonSocial, idDireccion, celular, email) VALUES (?,?,?,?)";
-    public static final String UPDATE_CLIENTE = "UPDATE cliente SET nombreRazonSocial=?, idDireccion=?. celular=?, email=? WHERE idCliente=?";
+    public static final String UPDATE_CLIENTE = "UPDATE cliente SET nombreRazonSocial=?, celular=?, email=? WHERE idCliente=?";
     public static final String DELETE_CLIENTE = "DELETE FROM cliente WHERE idCliente=?";
     public static final String SELECT_CLIENTE = "SELECT * FROM cliente WHERE idCliente=?";
     public static final String SELECT_ALL_CLIENTE = "SELECT * FROM cliente";
