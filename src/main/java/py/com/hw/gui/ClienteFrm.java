@@ -5,18 +5,18 @@
  */
 package py.com.hw.gui;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import py.com.hw.dao.ClienteDao;
-import py.com.hw.dao.DireccionDao;
 import py.com.hw.dao.mysql.jdbc.ClienteDaoMySQLImple;
-import py.com.hw.dao.mysql.jdbc.DireccionDaoMySQLImple;
+import py.com.hw.dao.util.Conexion;
 import py.com.hw.modelo.Cliente;
 import py.com.hw.modelo.Direccion;
 
@@ -30,9 +30,9 @@ public class ClienteFrm extends javax.swing.JFrame {
     /**
      * Creates new form ClienteFrm
      */
-    public ClienteFrm() {
+    public ClienteFrm() throws Exception {
         initComponents();
-        //construirTabla();
+        llenarTabla();
     }
 
     /**
@@ -65,9 +65,11 @@ public class ClienteFrm extends javax.swing.JFrame {
         txtNroCasa = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -219,11 +221,12 @@ public class ClienteFrm extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setEnabled(false);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
 
@@ -232,31 +235,28 @@ public class ClienteFrm extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(59, 59, 59)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nombre o Razón Social", "Celular", "Email"
             }
         ));
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -265,6 +265,20 @@ public class ClienteFrm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tabla);
+
+        jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -282,25 +296,36 @@ public class ClienteFrm extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lblNuevoCliente)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNuevoCliente)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblNuevoCliente)
-                        .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(btnEditar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -374,17 +399,116 @@ public class ClienteFrm extends javax.swing.JFrame {
             //Logger.getLogger(ClienteFrm.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }        
+        
+        vaciarCampos();
+        llenarTabla();
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        ClienteDao clienteDao = new ClienteDaoMySQLImple();
+        //Integer id = new Integer((int) tabla.getValueAt(tabla.getSelectedRow(), 0));
+        
+        Cliente cliente = new Cliente();
+        
+        cliente.setIdCliente(obtenerID());
+        cliente.setNombreRazonSocial(txtNombreRazonSocial.getText());
+        cliente.setCelular(txtCelular.getText());
+        cliente.setEmail(txtEmail.getText());
+        
+        try {
+            if(clienteDao.update(cliente)){
+                JOptionPane.showMessageDialog(null, "Cliente Actualizado...");
+            }else {
+                JOptionPane.showMessageDialog(null, "Algo Salio Mal");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        llenarTabla();
+        vaciarCampos();
+        btnActualizar.setEnabled(false);
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tablaMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ClienteDao clienteDao = new ClienteDaoMySQLImple();
+        Cliente c = new Cliente();
+        c.setIdCliente(new Integer(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
+        
+        try {
+            boolean valor = clienteDao.delete(c);
+            
+            if(valor){
+                JOptionPane.showMessageDialog(null, "Registro Eliminado");
+            }else {
+                JOptionPane.showMessageDialog(null, "Algo Salio Mal");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        llenarTabla();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        Cliente cliente = new Cliente();
+        
+        Integer id = new Integer((int) tabla.getValueAt(tabla.getSelectedRow(), 0));
+        
+        ClienteDao clienteDao = new ClienteDaoMySQLImple();
+        
+        try {
+            cliente = clienteDao.findById(id);
+            /*s
+            String callePrincipal = cliente.getDireccion().getCallePrincipal();
+            String calleTransversal = cliente.getDireccion().getCalleTransversal();
+            String barrio = cliente.getDireccion().getBarrioComp();*/
+           // int numero = cliente.getDireccion().getNroCasa();
+            
+            //System.out.println("ID GENERADO: "+ id);
+            
+            /*ClienteDao clienteDao = new ClienteDaoMySQLImple();
+            Direccion direccion = new Direccion();
+            Cliente clienteRecuperado = null;
+            
+            try {
+            clienteRecuperado = clienteDao.findById(cliente.getIdCliente());
+            } catch (SQLException ex) {
+            Logger.getLogger(ClienteFrm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            direccion = clienteRecuperado.getDireccion();
+            */
+            txtNombreRazonSocial.setText(cliente.getNombreRazonSocial());
+            txtEmail.setText(cliente.getEmail());
+            txtCelular.setText(cliente.getCelular());
+      /*      txtCallePrincipal.setText(callePrincipal);
+            txtcalleTransversal.setText(calleTransversal);
+            txtBarrioComp.setText(barrio);*/
+            //txtNroCasa.setText(cliente.getDireccion().getNroCasa());
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pasarID(id);
+        btnActualizar.setEnabled(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+    
+    private Integer idObtenido;
+    
+    public void pasarID(int id){
+        this.idObtenido = id;
+    }
+    
+    public Integer obtenerID(){
+        return idObtenido;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -415,45 +539,70 @@ public class ClienteFrm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClienteFrm().setVisible(true);
+                try {
+                    new ClienteFrm().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(ClienteFrm.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
     
-    public void llenarJTableNivel2(JTable jtNivel2)throws Exception{
-        try{
-            //Se crea un array para llenar las columnas de la tabla
-            ArrayList<Object> nombreColumna = new ArrayList<>();
-            nombreColumna.removeAll(nombreColumna);
-            nombreColumna.add("RUC");
-            nombreColumna.add("NombreRazonSocial");
-            nombreColumna.add("Celular");
-            nombreColumna.add("Email");
+    private void llenarTabla(){
+        try {
+            DefaultTableModel modelo = new DefaultTableModel();
+            tabla.setModel(modelo);
+
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            //Conexion conn = new Conexion();
+            Connection con = Conexion.getInstance().getConnection();
+
+            String sql = "SELECT idcliente, nombrerazonsocial, celular, email FROM cliente";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            ResultSetMetaData rsMd = (ResultSetMetaData) rs.getMetaData();
+            int cantidadColumnas = rsMd.getColumnCount();
+
+            modelo.addColumn("idCliente");
+            modelo.addColumn("Nombre o Razón Social");
+            modelo.addColumn("Celular");
+            modelo.addColumn("Email");
             
-            //se rellena con cada una de las columnas al array
-            for(Object columna : nombreColumna){
-                modelo.addColumn(columna);
+            int[] anchos = {50, 200, 50, 50};
+            for (int i = 0; i < tabla.getColumnCount(); i++) {
+                tabla.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
             }
-            //Se rellena con el array de listar Nivel2       
-            //Nivel2 controlador, hace referencia a la clase donde se creó el método listar  
-//            for(Nivel2 DatoNivel : Nivel2Controlador.listar()){
-//                //Como dato nivel es de nivo nivel2, este puede acceder a los métodos get y set
-//                modelo.addRow(new Object[]{DatoNivel.getNombre(),
-//                                           DatoNivel.getCosto(),
-//                                           DatoNivel.getStock(),
-//                                          }); 
-//            }
-            //se actualiza la Tabla
-            jtNivel2.setModel(modelo);
-        //en caso de error
-        }catch(Exception sqle){
-            JOptionPane.showMessageDialog(null,"Error llenar JTable " + sqle);
+
+            while (rs.next()) {
+                Object[] filas = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    filas[i] = rs.getObject(i + 1);
+                }
+                modelo.addRow(filas);
+            }
+
+        } catch (SQLException ex) {
+            System.err.println(ex.toString());
         }
     }
-
+    
+    private void vaciarCampos(){
+        txtNombreRazonSocial.setText("");
+        txtCelular.setText("");
+        txtEmail.setText("");
+        txtCallePrincipal.setText("");
+        txtcalleTransversal.setText("");
+        txtBarrioComp.setText("");
+        txtNroCasa.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -5,6 +5,9 @@
  */
 package py.com.hw.gui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author F996
@@ -12,7 +15,12 @@ package py.com.hw.gui;
 public class Principal {
 
     public static void main(String[] args) {
-        ClienteFrm formulario = new ClienteFrm();
+        ClienteFrm formulario = null;
+        try {
+            formulario = new ClienteFrm();
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         formulario.setVisible(true);
         formulario.setLocationRelativeTo(null);
     }
