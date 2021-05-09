@@ -1,4 +1,5 @@
 py\com\hw\dao\ClienteDao.class
+py\com\hw\gui\ClienteFrm$9.class
 py\com\hw\modelo\Direccion.class
 py\com\hw\gui\ClienteFrm$4.class
 py\com\hw\gui\ClienteFrm$2.class
@@ -7,11 +8,13 @@ py\com\hw\modelo\Cliente.class
 py\com\hw\gui\ClienteFrm$1.class
 py\com\hw\dao\util\Conexion.class
 py\com\hw\gui\ClienteFrm$5.class
+py\com\hw\gui\ClienteFrm$10.class
 py\com\hw\gui\ClienteFrm$6.class
 py\com\hw\dao\mysql\jdbc\DireccionDaoMySQLImple.class
 py\com\hw\test\TestConexion.class
 py\com\hw\dao\GenericDAO.class
 py\com\hw\gui\ClienteFrm.class
+py\com\hw\dao\util\CRUDConstants.class
 py\com\hw\gui\ClienteFrm$8.class
 py\com\hw\dao\DireccionDao.class
 py\com\hw\gui\ClienteFrm$7.class

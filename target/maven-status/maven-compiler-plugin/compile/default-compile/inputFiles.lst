@@ -2,6 +2,7 @@ C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\dao\DireccionDao.java
 C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\dao\mysql\jdbc\ClienteDaoMySQLImple.java
 C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\dao\ClienteDao.java
 C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\modelo\Cliente.java
+C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\dao\util\CRUDConstants.java
 C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\dao\mysql\jdbc\DireccionDaoMySQLImple.java
 C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\dao\util\Conexion.java
 C:\cursos\CRUD-JDBC\src\main\java\py\com\hw\test\TestConexion.java
