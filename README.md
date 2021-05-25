@@ -1,3 +1,2 @@
-# CRUD-JDBC-Example
-
-Ejemplo de Operaciones CRUD utilizando tecnología JDBC junto a Patrones de Diseño
+#EJEMPLO DE CRUD JDBC
+Pequeña demostracion de implementacion de capa de datos utilizando el patron DAO
