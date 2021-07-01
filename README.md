@@ -1,2 +1,2 @@
 #EJEMPLO DE CRUD JDBC
-Pequeña demostracion de implementacion de capa de datos utilizando el patron DAO
+Sistema de Ventas realizado en java con la librería Swing
