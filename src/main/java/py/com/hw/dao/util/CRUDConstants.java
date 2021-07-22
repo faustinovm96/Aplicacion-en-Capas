@@ -12,24 +12,15 @@ package py.com.hw.dao.util;
 public class CRUDConstants {
 
     /**Datos de Conexión a la DB*/
-    public static final String URL = "jdbc:mysql://localhost/test?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    public static final String URL = "jdbc:mysql://localhost/test_1?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     public static final String USERNAME = "root";
     public static final String PASSWORD = "holamundo96";
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    
-    /**SQL
-     *Queries SQL para la tabla direcciones*/
-    public static final String INSERT_DIRECCION = "INSERT INTO direccion (callePrincipal, calleTransversal, barrioComp, nroCasa) VALUES (?,?,?,?)";
-    public static final String UPDATE_DIRECCION = "UPDATE direccion SET callePrincipal=?, calleTransversal=?, barrioComp=?, nroCasa=? WHERE idDireccion=?";
-    public static final String SELECT_DIRECCION = "SELECT * FROM direccion WHERE idDireccion = ?";
-    public static final String SELECT_NRS_DIRECCION = "SELECT * FROM direccion WHERE nroCasa = ?";
-    public static final String SELECT_ALL_DIRECCION = "SELECT * FROM direccion";
-    public static final String DELETE_DIRECCION = "DELETE FROM direccion WHERE idDireccion = ?";
 
     /**Queries SQL para la tabla clientes**/
-    public static final String INSERT_CLIENTE = "INSERT INTO cliente (nombreRazonSocial, idDireccion, celular, email) VALUES (?,?,?,?)";
-    public static final String UPDATE_CLIENTE = "UPDATE cliente SET nombreRazonSocial=?, celular=?, email=? WHERE idCliente=?";
-    public static final String DELETE_CLIENTE = "DELETE FROM cliente WHERE idCliente=?";
-    public static final String SELECT_CLIENTE = "SELECT * FROM cliente WHERE idCliente=?";
-    public static final String SELECT_ALL_CLIENTE = "SELECT * FROM cliente";
+    public static final String INSERT_CLIENTE = "INSERT INTO clientes (cedularuc, nombre, direccion, telefono, email) VALUES (?,?,?,?,?)";
+    public static final String UPDATE_CLIENTE = "UPDATE clientes SET cedularuc=?, nombre=?, direccion=?, telefono=?, email=? WHERE id=?";
+    public static final String DELETE_CLIENTE = "DELETE FROM clientes WHERE id=?";
+    public static final String FIND_CLIENTE = "SELECT * FROM clientes WHERE id=?";
+    public static final String FINDALL_CLIENTES = "SELECT * FROM clientes";
 }

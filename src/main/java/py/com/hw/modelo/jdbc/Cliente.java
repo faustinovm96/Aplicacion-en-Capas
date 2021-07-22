@@ -1,4 +1,4 @@
-package py.com.hw.modelo;
+package py.com.hw.modelo.jdbc;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,10 +13,11 @@ public class Cliente implements Serializable{
     
     private static final Long serialUID = 1L;
    
-    private Integer idCliente;
-    private String nombreRazonSocial;
-    private Direccion direccion;
-    private String celular;
+    private Integer id;
+    private String cedulaRUC;
+    private String nombre;
+    private String direccion;
+    private String telefono;
     private String email;
     
     public Cliente() {
@@ -26,39 +27,47 @@ public class Cliente implements Serializable{
      * Método que consulta el valor de idCliente
      * @return Retorna el valor del atributo a través del método get consultor* 
      */
-    public Integer getIdCliente() {
-        return idCliente;
+    public Integer getId() {
+        return id;
     }
     
     /**
      * Método que asigna valor al atributo idCliente
-     * @param idCliente Recibe el valor del atributo a través del método modificador
+     * @param id Recibe el valor del atributo a través del método modificador
      */
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
+    public void setId(Integer id) {
+        this.id = id;
     }
     
     /**
      * Método consultor del atributo nombreRazonSocial
      * @return Retorna el valor del atributo nombreRazonSocial a través del método consultor
      */
-    public String getNombreRazonSocial() {
-        return nombreRazonSocial;
+    public String getNombre() {
+        return nombre;
+    }  
+    
+    public String getCedulaRUC() {
+        return cedulaRUC;
+    }
+
+    public void setCedulaRUC(String cedulaRUC) {
+        this.cedulaRUC = cedulaRUC;
     }
     
     /**
      * Método que asigna valor al atributo nombreRazonSocial
-     * @param nombreRazonSocial Recibe el valor del atributo a través del método modificador
+     * @param nombre Recibe el valor del atributo a través del método modificador
      */
-    public void setNombreRazonSocial(String nombreRazonSocial) {
-        this.nombreRazonSocial = nombreRazonSocial;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     /**
      * Método consultor del atributo direccion
      * @return Retorna el valor del atributo direccion a través del método consultor
      */
-    public Direccion getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
     
@@ -66,7 +75,7 @@ public class Cliente implements Serializable{
      * Método que asigna valor al atributo direccion
      * @param direccion Recibe el valor del atributo a través del método modificador
      */
-    public void setDireccion(Direccion direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
     
@@ -74,16 +83,16 @@ public class Cliente implements Serializable{
      * Método consultor del atributo celular
      * @return Retorna el valor del atributo celular a través del método consultor
      */
-    public String getCelular() {
-        return celular;
+    public String getTelefono() {
+        return telefono;
     }
     
     /**
      * Método que asigna valor al atributo celular
-     * @param celular Recibe el valor del atributo a través del método modificador
+     * @param telefono Recibe el valor del atributo a través del método modificador
      */
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
     
     /**
@@ -109,10 +118,10 @@ public class Cliente implements Serializable{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Cliente{idCliente=").append(idCliente);
-        sb.append(", nombreRazonSocial=").append(nombreRazonSocial);
+        sb.append("Cliente{idCliente=").append(id);
+        sb.append(", nombreRazonSocial=").append(nombre);
         sb.append(", direccion=").append(direccion);
-        sb.append(", celular=").append(celular);
+        sb.append(", celular=").append(telefono);
         sb.append(", email=").append(email);
         sb.append('}');
         return sb.toString();
@@ -125,10 +134,10 @@ public class Cliente implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.idCliente);
-        hash = 83 * hash + Objects.hashCode(this.nombreRazonSocial);
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.nombre);
         hash = 83 * hash + Objects.hashCode(this.direccion);
-        hash = 83 * hash + Objects.hashCode(this.celular);
+        hash = 83 * hash + Objects.hashCode(this.telefono);
         hash = 83 * hash + Objects.hashCode(this.email);
         return hash;
     }
@@ -150,16 +159,16 @@ public class Cliente implements Serializable{
             return false;
         }
         final Cliente other = (Cliente) obj;
-        if (!Objects.equals(this.nombreRazonSocial, other.nombreRazonSocial)) {
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
-        if (!Objects.equals(this.celular, other.celular)) {
+        if (!Objects.equals(this.telefono, other.telefono)) {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        if (!Objects.equals(this.idCliente, other.idCliente)) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.direccion, other.direccion)) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.hw.modelo;
+package py.com.hw.modelo.jdbc;
 
 import java.io.Serializable;
 import java.util.Objects;

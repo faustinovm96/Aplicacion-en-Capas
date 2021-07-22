@@ -1,4 +1,4 @@
-package py.com.hw.dao.util;
+package py.com.hw.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import py.com.hw.dao.util.CRUDConstants;
 
 /**
  * Clase de conexión a la base de datos

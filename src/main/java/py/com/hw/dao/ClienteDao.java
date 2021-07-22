@@ -5,12 +5,20 @@
  */
 package py.com.hw.dao;
 
-import py.com.hw.modelo.Cliente;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.util.List;
+import py.com.hw.modelo.jdbc.Cliente;
 
 /**
  *
  * @author Faustino Villasboa Martínez
+ * Cambiar esta implementación por ahora
  */
-public interface ClienteDao extends GenericDAO<Cliente, Integer>{
-    
+public interface ClienteDao{
+    public int save(Cliente a) throws SQLException;
+    public int update(Cliente cliente) throws SQLException;    
+    public int delete(Integer idCliente) throws SQLException;
+    public List<Cliente> findAll() throws SQLException;    
+    public Cliente findById(Integer idCliente) throws SQLException;
 }

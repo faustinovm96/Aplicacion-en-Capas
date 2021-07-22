@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import py.com.hw.dao.ClienteDao;
 import py.com.hw.dao.util.CRUDConstants;
-import py.com.hw.dao.util.Conexion;
-import py.com.hw.modelo.Cliente;
+import py.com.hw.dao.Conexion;
+import py.com.hw.modelo.jdbc.Cliente;
+
 
 /**
  *
@@ -21,39 +21,21 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     private Connection connection;
     private PreparedStatement preparedStatement;
     private ResultSet resultSet;
-    private boolean estado;
 
     @Override
-    public boolean save(Cliente cliente) throws SQLException {
-        estado = false;
-        int idGenerado = 0;
-        
+    public int save(Cliente cliente) throws SQLException {        
         try {
             connection = Conexion.getInstance().getConnection();
 
-            preparedStatement = connection.prepareStatement(CRUDConstants.INSERT_DIRECCION, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, cliente.getDireccion().getCallePrincipal());
-            preparedStatement.setString(2, cliente.getDireccion().getCalleTransversal());
-            preparedStatement.setString(3, cliente.getDireccion().getBarrioComp());
-            preparedStatement.setInt(4, cliente.getDireccion().getNroCasa());
-
-            System.out.println("Pasa Por INSERT");
-            preparedStatement.executeUpdate();
-
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-
-            if (rs.next()) {
-                System.out.println("IDINSERTADA: " + rs.getInt(1));
-                idGenerado += rs.getInt(1);
-            }
-
             preparedStatement = connection.prepareStatement(CRUDConstants.INSERT_CLIENTE);
-            preparedStatement.setString(1, cliente.getNombreRazonSocial());
-            preparedStatement.setInt(2, idGenerado);
-            preparedStatement.setString(3, cliente.getCelular());
-            preparedStatement.setString(4, cliente.getEmail());
+            preparedStatement.setString(1, cliente.getCedulaRUC());
+            preparedStatement.setString(2, cliente.getNombre());
+            preparedStatement.setString(3, cliente.getDireccion());
+            preparedStatement.setString(4, cliente.getTelefono());
+            preparedStatement.setString(5, cliente.getEmail());
 
-            estado = preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate();
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -62,23 +44,23 @@ public class ClienteDaoMySQLImple implements ClienteDao {
             System.out.println("Conexion Cerrada SAVE");
         }
 
-        return estado;
+        return 0;
     }
-
+    
     @Override
-    public boolean update(Cliente cliente) throws SQLException {
-        estado = false;
-
+    public int update(Cliente cliente) throws SQLException {
         try {
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(CRUDConstants.UPDATE_CLIENTE);
-            preparedStatement.setString(1, cliente.getNombreRazonSocial());
-            preparedStatement.setString(2, cliente.getCelular());
-            preparedStatement.setString(3, cliente.getEmail());
-            preparedStatement.setInt(4, cliente.getIdCliente());
+            preparedStatement.setString(1, cliente.getCedulaRUC());
+            preparedStatement.setString(2, cliente.getNombre());
+            preparedStatement.setString(3, cliente.getDireccion());
+            preparedStatement.setString(4, cliente.getTelefono());
+            preparedStatement.setString(5, cliente.getEmail());
+            preparedStatement.setInt(6, cliente.getId());
             
             System.out.println("PASA POR UPDATE");
-            estado = preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -87,44 +69,43 @@ public class ClienteDaoMySQLImple implements ClienteDao {
             System.out.println("Conexion Cerrada UPDATE");
         }
 
-        return estado;
+        return 0;
     }
 
     @Override
-    public boolean delete(Cliente a) throws SQLException {
-
-        estado = false;
+    public int delete(Integer idCliente) throws SQLException {
 
         try {
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(CRUDConstants.DELETE_CLIENTE);
-            preparedStatement.setInt(1, a.getIdCliente());
+            preparedStatement.setInt(1, idCliente);
 
-            estado = preparedStatement.executeUpdate() > 0;
+            return preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             preparedStatement.close();
         }
 
-        return estado;
+        return 0;
     }
 
     @Override
-    public List<Cliente> findAll() throws SQLException {
-        estado = false;
+    public List<Cliente> findAll() throws SQLException {;
         List<Cliente> listaClientes = new ArrayList<Cliente>();
 
         try {
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareStatement(CRUDConstants.SELECT_ALL_CLIENTE);
+            preparedStatement = connection.prepareStatement(CRUDConstants.FINDALL_CLIENTES);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setIdCliente(resultSet.getInt("idcliente"));
-                cliente.setNombreRazonSocial(resultSet.getString("nombrerazonsocial"));
-                cliente.setCelular(resultSet.getString("celular"));
+                cliente.setId(resultSet.getInt("id"));
+                cliente.setNombre(resultSet.getString("nombre"));
+                cliente.setCedulaRUC(resultSet.getString("cedularuc"));
+                cliente.setDireccion(resultSet.getString("direccion"));
+                cliente.setTelefono(resultSet.getString("telefono"));
                 cliente.setEmail(resultSet.getString("email"));
 
                 listaClientes.add(cliente);
@@ -139,24 +120,21 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     }
 
     @Override
-    public Cliente findById(Integer b) throws SQLException {
+    public Cliente findById(Integer idCliente) throws SQLException {
         Cliente cliente = null;
-
         try {
             connection = Conexion.getInstance().getConnection();
-            preparedStatement = connection.prepareCall(CRUDConstants.SELECT_CLIENTE);
-            preparedStatement.setInt(1, b);
+            preparedStatement = connection.prepareStatement(CRUDConstants.FIND_CLIENTE);
+            preparedStatement.setInt(1, idCliente);
             resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                String nombreRazonSocial = resultSet.getString("nombreRazonSocial");
-                String celular = resultSet.getString("celular");
-                String email = resultSet.getString("email");
-
                 cliente = new Cliente();
-                cliente.setIdCliente(resultSet.getInt("idcliente"));
-                cliente.setNombreRazonSocial(resultSet.getString("nombrerazonsocial"));
-                cliente.setCelular(resultSet.getString("celular"));
+                cliente.setId(resultSet.getInt("id"));
+                cliente.setNombre(resultSet.getString("cedularuc"));
+                cliente.setCedulaRUC(resultSet.getString("nombre"));
+                cliente.setDireccion(resultSet.getString("direccion"));
+                cliente.setTelefono(resultSet.getString("telefono"));
                 cliente.setEmail(resultSet.getString("email"));
             }
         } catch (SQLException e) {

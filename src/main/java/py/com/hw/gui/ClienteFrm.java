@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import py.com.hw.dao.ClienteDao;
 import py.com.hw.dao.mysql.jdbc.ClienteDaoMySQLImple;
-import py.com.hw.dao.util.Conexion;
-import py.com.hw.modelo.Cliente;
-import py.com.hw.modelo.Direccion;
+import py.com.hw.dao.Conexion;
+import py.com.hw.modelo.jdbc.Cliente;
+import py.com.hw.modelo.jdbc.Direccion;
 
 /**
  *
@@ -379,9 +379,9 @@ public class ClienteFrm extends javax.swing.JFrame {
 //            Direccion direccion1 = direccionDao.findByNroCasa(direccion.getNroCasa());
             
             Cliente cliente = new Cliente();
-            cliente.setNombreRazonSocial(txtNombreRazonSocial.getText());
+            cliente.setNombre(txtNombreRazonSocial.getText());
             cliente.setDireccion(direccion);
-            cliente.setCelular(txtCelular.getText());
+            cliente.setTelefono(txtCelular.getText());
             cliente.setEmail(txtEmail.getText());
             
             ClienteDao clienteDao = new ClienteDaoMySQLImple();
@@ -411,9 +411,9 @@ public class ClienteFrm extends javax.swing.JFrame {
         
         Cliente cliente = new Cliente();
         
-        cliente.setIdCliente(obtenerID());
-        cliente.setNombreRazonSocial(txtNombreRazonSocial.getText());
-        cliente.setCelular(txtCelular.getText());
+        cliente.setId(obtenerID());
+        cliente.setNombre(txtNombreRazonSocial.getText());
+        cliente.setTelefono(txtCelular.getText());
         cliente.setEmail(txtEmail.getText());
         
         try {
@@ -438,7 +438,7 @@ public class ClienteFrm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ClienteDao clienteDao = new ClienteDaoMySQLImple();
         Cliente c = new Cliente();
-        c.setIdCliente(new Integer(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
+        c.setId(new Integer(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
         
         try {
             boolean valor = clienteDao.delete(c);
@@ -485,9 +485,9 @@ public class ClienteFrm extends javax.swing.JFrame {
             
             direccion = clienteRecuperado.getDireccion();
             */
-            txtNombreRazonSocial.setText(cliente.getNombreRazonSocial());
+            txtNombreRazonSocial.setText(cliente.getNombre());
             txtEmail.setText(cliente.getEmail());
-            txtCelular.setText(cliente.getCelular());
+            txtCelular.setText(cliente.getTelefono());
       /*      txtCallePrincipal.setText(callePrincipal);
             txtcalleTransversal.setText(calleTransversal);
             txtBarrioComp.setText(barrio);*/
