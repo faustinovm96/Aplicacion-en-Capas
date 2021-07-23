@@ -32,15 +32,6 @@ public class ClienteService {
         return false;
     }
     
-    public Cliente findCliente(int idCliente){
-        try {
-            return clienteDao.findById(idCliente);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-    
     public boolean update(Cliente cliente){
         try {
             if(clienteDao.update(cliente) > 0){
@@ -50,6 +41,26 @@ public class ClienteService {
             ex.printStackTrace();
         }
         return false;
+    }
+    
+    public boolean delete(Integer idCliente){
+        try {
+            if(clienteDao.delete(idCliente) > 0){
+                return true;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public Cliente findCliente(int idCliente){
+        try {
+            return clienteDao.findById(idCliente);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
     
     public List<Cliente> findAll(){
