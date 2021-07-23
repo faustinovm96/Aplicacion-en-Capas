@@ -67,7 +67,7 @@ public class ClienteService {
         try {
             return clienteDao.findAll();
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return null;
     }
