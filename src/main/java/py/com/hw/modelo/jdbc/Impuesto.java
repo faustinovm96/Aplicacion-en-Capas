@@ -5,10 +5,52 @@
  */
 package py.com.hw.modelo.jdbc;
 
+import java.io.Serializable;
+
 /**
  *
  * @author F996
  */
-public class Impuesto {
+public class Impuesto implements Serializable {
+    private int id;
+    private String descripcion;
+    private Double valor;
+
+    public Impuesto() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Impuesto{id=").append(id);
+        sb.append(", descripcion=").append(descripcion);
+        sb.append(", valor=").append(valor);
+        sb.append('}');
+        return sb.toString();
+    }
     
 }
