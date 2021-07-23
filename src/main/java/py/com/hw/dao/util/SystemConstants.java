@@ -11,6 +11,8 @@ package py.com.hw.dao.util;
  */
 public class SystemConstants {
 
+    //TODO: Añadir un metodo que reciba un arraylist con los campos de la tabla para desestructurar el mismo
+    //y utilizarlo para realizar las consultas
     /**Datos de Conexión a la DB*/
     public static final String URL = "jdbc:mysql://localhost/test_1?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     public static final String USERNAME = "root";
@@ -30,5 +32,12 @@ public class SystemConstants {
     public static final String DELETE_CATEGORIA = "DELETE FROM categorias WHERE id=?";
     public static final String FIND_CATEGORIA = "SELECT * FROM categorias WHERE id=?";
     public static final String FINDALL_CATEGORIA = "SELECT * FROM categorias";
+    
+    /**Queries SQL para la tabla impuestos**/
+    public static final String INSERT_IMPUESTOS = "INSERT INTO impuestos (descripcion, valor) VALUES (?,?)";
+    public static final String UPDATE_IMPUESTOS = "UPDATE impuestos SET descripcion=?, valor=? WHERE id=?";
+    public static final String DELETE_IMPUESTOS = "DELETE FROM impuestos WHERE id=?";
+    public static final String FIND_IMPUESTOS = "SELECT * FROM impuestos WHERE id=?";
+    public static final String FINDALL_IMPUESTOS = "SELECT * FROM impuestos";
     
 }
