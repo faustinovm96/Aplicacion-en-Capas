@@ -9,7 +9,7 @@ package py.com.hw.dao.util;
  *
  * @author Faustino Villasboa Martínez
  */
-public class CRUDConstants {
+public class SystemConstants {
 
     /**Datos de Conexión a la DB*/
     public static final String URL = "jdbc:mysql://localhost/test_1?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
@@ -23,4 +23,12 @@ public class CRUDConstants {
     public static final String DELETE_CLIENTE = "DELETE FROM clientes WHERE id=?";
     public static final String FIND_CLIENTE = "SELECT * FROM clientes WHERE id=?";
     public static final String FINDALL_CLIENTES = "SELECT * FROM clientes";
+    
+    /**Queries SQL para la tabla categorias**/
+    public static final String INSERT_CATEGORIA = "INSERT INTO categorias (categoria, descripcion) VALUES (?,?)";
+    public static final String UPDATE_CATEGORIA = "UPDATE categorias SET categoria=?, descripcion=? WHERE id=?";
+    public static final String DELETE_CATEGORIA = "DELETE FROM categorias WHERE id=?";
+    public static final String FIND_CATEGORIA = "SELECT * FROM categorias WHERE id=?";
+    public static final String FINDALL_CATEGORIA = "SELECT * FROM categorias";
+    
 }

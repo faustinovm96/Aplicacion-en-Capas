@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import py.com.hw.dao.util.CRUDConstants;
+import py.com.hw.dao.util.SystemConstants;
 
 /**
  * Clase de conexión a la base de datos
@@ -22,8 +22,8 @@ public class Conexion {
     
     private Conexion() throws SQLException {
         try {
-            Class.forName(CRUDConstants.DRIVER);
-            this.connection = DriverManager.getConnection(CRUDConstants.URL, CRUDConstants.USERNAME, CRUDConstants.PASSWORD);
+            Class.forName(SystemConstants.DRIVER);
+            this.connection = DriverManager.getConnection(SystemConstants.URL, SystemConstants.USERNAME, SystemConstants.PASSWORD);
         } catch (ClassNotFoundException ex) {
             System.out.println("Problema Ocurrido : " + ex.getMessage());
         }

@@ -6,6 +6,7 @@
 package py.com.hw.service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import py.com.hw.dao.ClienteDao;
@@ -49,5 +50,14 @@ public class ClienteService {
             ex.printStackTrace();
         }
         return false;
+    }
+    
+    public List<Cliente> findAll(){
+        try {
+            return clienteDao.findAll();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

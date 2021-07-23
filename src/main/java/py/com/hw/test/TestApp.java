@@ -14,20 +14,21 @@ import py.com.hw.service.ClienteService;
  */
 public class TestApp {
     public static void main(String[] args) {
-        Cliente cliente = new Cliente();
-        cliente.setNombre("Faustino Villasboa Martínez");
-        cliente.setCedulaRUC("5540983");
-        cliente.setDireccion("Km 42");
-        cliente.setTelefono("0971868761");
-        cliente.setEmail("fvillasboa96@gmail.com");
+//        Cliente cliente = new Cliente();
+//        cliente.setNombre("Luis Torres");
+//        cliente.setCedulaRUC("7485693");
+//        cliente.setDireccion("Km 42");
+//        cliente.setTelefono("0992145639");
+//        cliente.setEmail("luistarma7@gmail.com");
         
         ClienteService servicio = new ClienteService();
+        System.out.println(servicio.findAll());
         
-        if(servicio.save(cliente)){
-            System.out.println("Cliente Registrado");
-        }else{
-            System.out.println("Cliente no Registrado (ERROR)");
-        }
+//        if(servicio.save(cliente)){
+//            System.out.println("Cliente Registrado");
+//        }else{
+//            System.out.println("Cliente no Registrado (ERROR)");
+//        }
         
     }
 }
