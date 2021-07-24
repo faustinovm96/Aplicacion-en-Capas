@@ -56,7 +56,7 @@ public class ArticuloService {
         return false;
     }
     
-    public List<Articulo> findAllCategorias(){
+    public List<Articulo> findAllArticulos(){
         try {
             return articuloDao.findAll();
         } catch (SQLException ex) {
@@ -65,7 +65,7 @@ public class ArticuloService {
         return null;
     }
     
-    public Articulo findCategoria(Integer idArticulo){
+    public Articulo findArticulo(Integer idArticulo){
         try {
             return articuloDao.findById(idArticulo);
         } catch (SQLException ex) {
