@@ -40,4 +40,11 @@ public class SystemConstants {
     public static final String FIND_IMPUESTOS = "SELECT * FROM impuestos WHERE id=?";
     public static final String FINDALL_IMPUESTOS = "SELECT * FROM impuestos";
     
+    /**Queries SQL para la tabla articulos**/
+    public static final String INSERT_ARTICULO = "INSERT INTO articulos (codigo, nombre, descripcion, p_compra, p_venta, stock, id_categoria, id_impuesto) VALUES (?,?,?,?,?,?,?,?)";
+    public static final String UPDATE_ARTICULO = "UPDATE articulos SET codigo=?, nombre=?, descripcion=?, p_compra=?, p_venta=?, stock=?, id_categoria=?, id_impuesto=? WHERE id=?";
+    public static final String DELETE_ARTICULO = "DELETE FROM articulos WHERE id=?";
+    public static final String FIND_ARTICULO = "SELECT * FROM articulos WHERE id=?";
+    public static final String FINDALL_ARTICULO = "SELECT * FROM articulos";
+    
 }
