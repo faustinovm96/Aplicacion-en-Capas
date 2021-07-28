@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import py.com.hw.dao.CategoriaDao;
 import py.com.hw.dao.Conexion;
 import py.com.hw.dao.util.SystemConstants;
@@ -21,6 +23,8 @@ import py.com.hw.modelo.jdbc.Categoria;
  * @author F996
  */
 public class CategoriaDaoMySQLImpl implements CategoriaDao{
+    
+    private static final Logger LOGGER = LogManager.getLogger(CategoriaDaoMySQLImpl.class);
 
     private Connection connection;
     private PreparedStatement preparedStatement;
@@ -36,10 +40,13 @@ public class CategoriaDaoMySQLImpl implements CategoriaDao{
             preparedStatement.setString(1, categoria.getCategoria());
             preparedStatement.setString(2, categoria.getDescripcion());
             
+            LOGGER.info("Bien por aqui");
+            
             return preparedStatement.executeUpdate();
             
         } catch (SQLException e) {
             e.printStackTrace();
+            LOGGER.error("MAL POR ACA");
         }
         return 0;
     }
