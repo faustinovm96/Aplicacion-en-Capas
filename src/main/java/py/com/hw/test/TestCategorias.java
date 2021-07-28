@@ -15,10 +15,11 @@ import py.com.hw.service.CategoriaService;
 public class TestCategorias {
     public static void main(String[] args) {
         Categoria cat = new Categoria();
-//        cat.setCategoria("TINTAS");
-//        cat.setDescripcion("Tintas para impresoras");
+        cat.setCategoria("TINTAS");
+        cat.setDescripcion("Tintas para impresoras");
 //        
         CategoriaService catService = new CategoriaService();
+        if(catService.saveCategoria(cat)) System.out.println("Registro Exitoso");
 //        cat = catService.findCategoria(2);
 //        cat.setDescripcion("TINTA PARA IMPRESORAS Y SUBLIMADORAS");
 //        
@@ -29,7 +30,6 @@ public class TestCategorias {
 //        }
 //        if(catService.saveCategoria(cat)) System.out.println("Registro Exitoso");
 
-//          System.out.println("Lista"+ catService.findAllCategorias());
-            if(catService.deleteCategoria(2)) System.out.println("Registro Eliminado");
+//          System.out.println("Lista"+ catService.findAllCategorias());");
     }
 }
