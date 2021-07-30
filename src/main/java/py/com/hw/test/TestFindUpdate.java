@@ -17,7 +17,7 @@ public class TestFindUpdate {
         
         ClienteService servicio = new ClienteService();
         
-        Cliente clienteRecuperado = servicio.findCliente(1);
+        Cliente clienteRecuperado = servicio.findCliente(8);
         
         if(clienteRecuperado != null){
             clienteRecuperado.setNombre("Faustino Villasboa");
