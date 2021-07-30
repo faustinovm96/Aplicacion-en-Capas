@@ -18,14 +18,23 @@ import py.com.hw.modelo.jdbc.Cliente;
  */
 public class ClienteDaoMySQLImple implements ClienteDao {
 
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
+    private Connection connTransactional;
 
+    public ClienteDaoMySQLImple(Connection connTransactional) {
+        this.connTransactional = connTransactional;
+    }
+
+    public ClienteDaoMySQLImple() {
+    }
+    
     @Override
-    public int save(Cliente cliente) throws SQLException {        
+    public int save(Cliente cliente) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
 
             preparedStatement = connection.prepareStatement(SystemConstants.INSERT_CLIENTE);
             preparedStatement.setString(1, cliente.getCedulaRUC());
@@ -49,8 +58,11 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     
     @Override
     public int update(Cliente cliente) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.UPDATE_CLIENTE);
             preparedStatement.setString(1, cliente.getCedulaRUC());
             preparedStatement.setString(2, cliente.getNombre());
@@ -74,9 +86,12 @@ public class ClienteDaoMySQLImple implements ClienteDao {
 
     @Override
     public int delete(Integer idCliente) throws SQLException {
-
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
+
             preparedStatement = connection.prepareStatement(SystemConstants.DELETE_CLIENTE);
             preparedStatement.setInt(1, idCliente);
 
@@ -91,10 +106,14 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     }
 
     @Override
-    public List<Cliente> findAll() throws SQLException {;
+    public List<Cliente> findAll() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<Cliente> listaClientes = new ArrayList<Cliente>();
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
+
             preparedStatement = connection.prepareStatement(SystemConstants.FINDALL_CLIENTES);
             resultSet = preparedStatement.executeQuery();
 
@@ -119,9 +138,13 @@ public class ClienteDaoMySQLImple implements ClienteDao {
 
     @Override
     public Cliente findById(Integer idCliente) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Cliente cliente = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
+
             preparedStatement = connection.prepareStatement(SystemConstants.FIND_CLIENTE);
             preparedStatement.setInt(1, idCliente);
             resultSet = preparedStatement.executeQuery();
