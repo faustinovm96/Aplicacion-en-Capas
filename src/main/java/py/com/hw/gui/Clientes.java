@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import py.com.hw.dao.Conexion;
@@ -68,6 +67,12 @@ public class Clientes extends javax.swing.JInternalFrame {
         jLabel1.setText("Nombre o Razón Social:");
 
         jLabel2.setText("RUC o Cédula:");
+
+        rucCedulaTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rucCedulaTxtActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Dirección:");
 
@@ -288,8 +293,8 @@ public class Clientes extends javax.swing.JInternalFrame {
         Cliente cliente = new Cliente();
         ClienteService clienteService = new ClienteService();
         
-        Integer id = new Integer((int)tablaClientes.getValueAt(tablaClientes.getSelectedRow(), 0));
-        
+        Integer id = (int)tablaClientes.getValueAt(tablaClientes.getSelectedRow(), 0);
+        System.out.println("ID: " + id);
         cliente = clienteService.findCliente(id);
         
         if(cliente != null){
@@ -351,6 +356,10 @@ public class Clientes extends javax.swing.JInternalFrame {
         llenarTabla();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void rucCedulaTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rucCedulaTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rucCedulaTxtActionPerformed
+
     private void limpiarCampos(){
         rucCedulaTxt.setText("");
         nombreRazonSocialTxt.setText("");
@@ -362,15 +371,15 @@ public class Clientes extends javax.swing.JInternalFrame {
     private void llenarTabla(){
         
          try {
-            DefaultTableModel modelo = new DefaultTableModel();
+            modelo = new DefaultTableModel();
             tablaClientes.setModel(modelo);
 
             PreparedStatement ps = null;
             ResultSet rs = null;
             //Conexion conn = new Conexion();
-            Connection con = Conexion.getInstance().getConnection();
+            Connection con = Conexion.getConnection();
 
-            String sql = "SELECT cedularuc, nombre, direccion, telefono, email FROM clientes";
+            String sql = "SELECT id, nombre, direccion, telefono, email FROM clientes";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -403,6 +412,7 @@ public class Clientes extends javax.swing.JInternalFrame {
     }
     
     private DefaultTableModel modelo;
+    
     private Integer idObtenido;
 
     public Integer getIdObtenido() {
