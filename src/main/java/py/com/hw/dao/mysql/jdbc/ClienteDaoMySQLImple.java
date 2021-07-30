@@ -93,7 +93,6 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     @Override
     public List<Cliente> findAll() throws SQLException {;
         List<Cliente> listaClientes = new ArrayList<Cliente>();
-
         try {
             connection = Conexion.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.FINDALL_CLIENTES);
@@ -115,7 +114,6 @@ public class ClienteDaoMySQLImple implements ClienteDao {
         } finally {
             preparedStatement.close();
         }
-
         return listaClientes;
     }
 

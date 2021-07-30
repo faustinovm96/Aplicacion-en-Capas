@@ -21,6 +21,10 @@ public class Conexion {
     private Connection connection;
     
     private Conexion() throws SQLException {
+        jdbcConnection();
+    }
+
+    private void jdbcConnection() throws SQLException {
         try {
             Class.forName(SystemConstants.DRIVER);
             this.connection = DriverManager.getConnection(SystemConstants.URL, SystemConstants.USERNAME, SystemConstants.PASSWORD);
