@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import py.com.hw.dao.Conexion;
@@ -379,6 +380,8 @@ public class Clientes extends javax.swing.JInternalFrame {
             //Conexion conn = new Conexion();
             Connection con = Conexion.getConnection();
 
+            ClienteService service = new ClienteService();
+            
             String sql = "SELECT id, nombre, direccion, telefono, email FROM clientes";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();

@@ -5,10 +5,12 @@
  */
 package py.com.hw.service;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import py.com.hw.dao.Conexion;
 import py.com.hw.dao.ImpuestoDao;
 import py.com.hw.dao.mysql.jdbc.ImpuestoDaoMySQLImpl;
 import py.com.hw.modelo.jdbc.Impuesto;
@@ -18,10 +20,13 @@ import py.com.hw.modelo.jdbc.Impuesto;
  * @author F996
  */
 public class ImpuestoService {
-    private ImpuestoDao impuestoDao = new ImpuestoDaoMySQLImpl();;
+    private Connection connection;
+    private ImpuestoDao impuestoDao = null;
     
     public boolean saveImpuesto(Impuesto impuesto){
         try {
+            connection = Conexion.getConnection();
+            impuestoDao = new ImpuestoDaoMySQLImpl();
             if(impuestoDao.save(impuesto) > 0){
                return true;
             }
@@ -34,6 +39,8 @@ public class ImpuestoService {
     
     public boolean updateImpuesto(Impuesto impuesto){
         try {
+            connection = Conexion.getConnection();
+            impuestoDao = new ImpuestoDaoMySQLImpl();
             if(impuestoDao.update(impuesto) > 0){
                return true;
             }
@@ -46,6 +53,8 @@ public class ImpuestoService {
     
     public boolean deleteImpuesto(Integer idImpuesto){
         try {
+            connection = Conexion.getConnection();
+            impuestoDao = new ImpuestoDaoMySQLImpl();
             if(impuestoDao.delete(idImpuesto) > 0){
                return true;
             }
@@ -58,6 +67,8 @@ public class ImpuestoService {
     
     public List<Impuesto> findAllImpuestos(){
         try {
+            connection = Conexion.getConnection();
+            impuestoDao = new ImpuestoDaoMySQLImpl();
             return impuestoDao.findAll();
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaService.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,6 +78,8 @@ public class ImpuestoService {
     
     public Impuesto findImpuesto(Integer idImpuesto){
         try {
+            connection = Conexion.getConnection();
+            impuestoDao = new ImpuestoDaoMySQLImpl();
             return impuestoDao.findById(idImpuesto);
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaService.class.getName()).log(Level.SEVERE, null, ex);
