@@ -21,15 +21,23 @@ import py.com.hw.modelo.jdbc.Articulo;
  * @author F996
  */
 public class ArticuloDaoMySQLImpl implements ArticuloDao{
+    
+    private Connection connTransactional;
 
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
+    public ArticuloDaoMySQLImpl(Connection connTransactional) {
+        this.connTransactional = connTransactional;
+    }
+
+    public ArticuloDaoMySQLImpl() {
+    }
     
     @Override
     public int save(Articulo articulo) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.INSERT_ARTICULO);
             preparedStatement.setString(1, articulo.getCodigo());
             preparedStatement.setString(2, articulo.getNombre());
@@ -50,8 +58,11 @@ public class ArticuloDaoMySQLImpl implements ArticuloDao{
 
     @Override
     public int update(Articulo articulo) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.UPDATE_ARTICULO);
             
             preparedStatement.setString(1, articulo.getCodigo());
@@ -73,8 +84,11 @@ public class ArticuloDaoMySQLImpl implements ArticuloDao{
 
     @Override
     public int delete(Integer idArticulo) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.DELETE_ARTICULO);
             
             preparedStatement.setInt(1, idArticulo);
@@ -89,9 +103,12 @@ public class ArticuloDaoMySQLImpl implements ArticuloDao{
 
     @Override
     public List<Articulo> findAll() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<Articulo> listaArticulos = new ArrayList<Articulo>();
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareCall(SystemConstants.FINDALL_ARTICULO);
             resultSet = preparedStatement.executeQuery();
             
@@ -116,10 +133,13 @@ public class ArticuloDaoMySQLImpl implements ArticuloDao{
 
     @Override
     public Articulo findById(Integer idArticulo) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Articulo articulo = null;
         
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.FIND_ARTICULO);
             preparedStatement.setInt(1, idArticulo);
             

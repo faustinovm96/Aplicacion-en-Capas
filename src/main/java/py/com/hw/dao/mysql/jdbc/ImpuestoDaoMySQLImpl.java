@@ -22,14 +22,22 @@ import py.com.hw.modelo.jdbc.Impuesto;
  */
 public class ImpuestoDaoMySQLImpl implements ImpuestoDao{
 
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
+    private Connection connTransactional;
+
+    public ImpuestoDaoMySQLImpl(Connection connTransactional) {
+        this.connTransactional = connTransactional;
+    }
+
+    public ImpuestoDaoMySQLImpl() {
+    }
     
     @Override
     public int save(Impuesto impuesto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareCall(SystemConstants.INSERT_IMPUESTOS);
             preparedStatement.setString(1, impuesto.getDescripcion());
             preparedStatement.setDouble(2, impuesto.getValor());
@@ -44,8 +52,11 @@ public class ImpuestoDaoMySQLImpl implements ImpuestoDao{
 
     @Override
     public int update(Impuesto impuesto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.UPDATE_IMPUESTOS);
             preparedStatement.setString(1, impuesto.getDescripcion());
             preparedStatement.setDouble(2, impuesto.getValor());
@@ -60,8 +71,11 @@ public class ImpuestoDaoMySQLImpl implements ImpuestoDao{
 
     @Override
     public int delete(Integer idImpuesto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.DELETE_IMPUESTOS);
             preparedStatement.setInt(1, idImpuesto);
             
@@ -74,9 +88,12 @@ public class ImpuestoDaoMySQLImpl implements ImpuestoDao{
 
     @Override
     public List<Impuesto> findAll() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<Impuesto> listaImpuestos = new ArrayList<Impuesto>();
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareCall(SystemConstants.FINDALL_IMPUESTOS);
             resultSet = preparedStatement.executeQuery();
             
@@ -97,9 +114,12 @@ public class ImpuestoDaoMySQLImpl implements ImpuestoDao{
 
     @Override
     public Impuesto findById(Integer idImpuesto) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Impuesto impuesto = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.FIND_IMPUESTOS);
             preparedStatement.setInt(1, idImpuesto);
             

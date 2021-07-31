@@ -25,15 +25,24 @@ import py.com.hw.modelo.jdbc.Categoria;
 public class CategoriaDaoMySQLImpl implements CategoriaDao{
     
     private static final Logger LOGGER = LogManager.getLogger(CategoriaDaoMySQLImpl.class);
+    
+    private Connection connTransactional;
 
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
+    public CategoriaDaoMySQLImpl(Connection connection) {
+        this.connTransactional = connection;
+    }
+
+    public CategoriaDaoMySQLImpl() {
+    }
+    
     
     @Override
     public int save(Categoria categoria) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             
             preparedStatement = connection.prepareStatement(SystemConstants.INSERT_CATEGORIA);
             
@@ -53,8 +62,11 @@ public class CategoriaDaoMySQLImpl implements CategoriaDao{
 
     @Override
     public int update(Categoria categoria) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.UPDATE_CATEGORIA);
             
             preparedStatement.setString(1, categoria.getCategoria());
@@ -71,8 +83,11 @@ public class CategoriaDaoMySQLImpl implements CategoriaDao{
 
     @Override
     public int delete(Integer idCategoria) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.DELETE_CATEGORIA);
             
             preparedStatement.setInt(1, idCategoria);
@@ -87,10 +102,13 @@ public class CategoriaDaoMySQLImpl implements CategoriaDao{
 
     @Override
     public List<Categoria> findAll() throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         List<Categoria> listaCategorias = new ArrayList<Categoria>();
         
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.FINDALL_CATEGORIA);
             
             resultSet = preparedStatement.executeQuery();
@@ -113,9 +131,12 @@ public class CategoriaDaoMySQLImpl implements CategoriaDao{
 
     @Override
     public Categoria findById(Integer idCategoria) throws SQLException {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
         Categoria categoria = null;
         try {
-            connection = Conexion.getInstance().getConnection();
+            connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
             preparedStatement = connection.prepareStatement(SystemConstants.FIND_CATEGORIA);
             preparedStatement.setInt(1, idCategoria);
             
