@@ -13,10 +13,6 @@ import py.com.hw.modelo.jdbc.Articulo;
  *
  * @author F996
  */
-public interface ArticuloDao {
-    public int save(Articulo articulo) throws SQLException;
-    public int update(Articulo articulo) throws SQLException;    
-    public int delete(Integer idArticulo) throws SQLException;
-    public List<Articulo> findAll() throws SQLException;    
-    public Articulo findById(Integer idArticulo) throws SQLException;    
+public interface ArticuloDao extends GenericDAO<Articulo, Integer>{
+        
 }
