@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>py.com.hw</groupId>
-    <artifactId>Clientes-Articulos-JDBC</artifactId>
+    <artifactId>BackEnd-JDBC-JPA</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <dependencies>
@@ -50,5 +50,5 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <name>Clientes-Articulos-JDBC</name>
+    <name>BackEnd-JDBC-JPA</name>
 </project>

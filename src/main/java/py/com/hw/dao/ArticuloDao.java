@@ -13,6 +13,6 @@ import py.com.hw.modelo.jdbc.Articulo;
  *
  * @author F996
  */
-public interface ArticuloDao extends GenericDAO<Articulo, Integer>{
+public interface ArticuloDao extends GenericDao<Articulo, Integer>{
         
 }
