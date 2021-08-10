@@ -21,12 +21,12 @@ import py.com.hw.service.ClienteService;
  *
  * @author F996
  */
-public class Clientes extends javax.swing.JInternalFrame {
+public class ClientesForm extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Clientes
      */
-    public Clientes() {
+    public ClientesForm() {
         initComponents();
         llenarTabla();
     }
