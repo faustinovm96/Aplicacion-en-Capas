@@ -13,10 +13,6 @@ import py.com.hw.modelo.jdbc.Impuesto;
  *
  * @author F996
  */
-public interface ImpuestoDao {
-    public int save(Impuesto impuesto) throws SQLException;
-    public int update(Impuesto impuesto) throws SQLException;    
-    public int delete(Integer idImpuesto) throws SQLException;
-    public List<Impuesto> findAll() throws SQLException;    
-    public Impuesto findById(Integer idImpuesto) throws SQLException;
+public interface ImpuestoDao extends GenericDao<Impuesto, Integer> {
+
 }

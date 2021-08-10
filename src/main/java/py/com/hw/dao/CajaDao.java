@@ -13,10 +13,6 @@ import py.com.hw.modelo.jdbc.Caja;
  *
  * @author F996
  */
-public interface CajaDao {
-    public int save(Caja caja) throws SQLException;
-    public int update(Caja caja) throws SQLException;    
-    public int delete(Integer idCaja) throws SQLException;
-    public List<Caja> findAll() throws SQLException;    
-    public Caja findById(Integer idCaja) throws SQLException;  
+public interface CajaDao extends GenericDao<Caja, Integer> {
+    
 }

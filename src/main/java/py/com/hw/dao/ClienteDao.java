@@ -15,10 +15,6 @@ import py.com.hw.modelo.jdbc.Cliente;
  * @author Faustino Villasboa Martínez
  * Cambiar esta implementación por ahora
  */
-public interface ClienteDao{
-    public int save(Cliente a) throws SQLException;
-    public int update(Cliente cliente) throws SQLException;    
-    public int delete(Integer idCliente) throws SQLException;
-    public List<Cliente> findAll() throws SQLException;    
-    public Cliente findById(Integer idCliente) throws SQLException;
+public interface ClienteDao extends GenericDao<Cliente, Integer>{
+   
 }
