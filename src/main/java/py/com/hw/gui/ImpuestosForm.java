@@ -199,9 +199,8 @@ public class ImpuestosForm extends javax.swing.JInternalFrame {
         impuesto = service.findImpuesto(id);
         
         if(impuesto != null){
-            impuesto.setDescripcion(descripcionTxt.getText());
-            double valor = Double.parseDouble(valorTxt.getText());
-            impuesto.setValor(valor);
+            descripcionTxt.setText(impuesto.getDescripcion());
+            valorTxt.setText(String.valueOf(impuesto.getValor()));
         }else {
             JOptionPane.showMessageDialog(null, "Algo ha salido horriblemente mal");
         }
