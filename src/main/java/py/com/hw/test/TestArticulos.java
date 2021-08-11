@@ -5,7 +5,7 @@
  */
 package py.com.hw.test;
 
-import py.com.hw.modelo.jdbc.Articulo;
+import py.com.hw.modelo.Articulo;
 import py.com.hw.service.ArticuloService;
 
 /**

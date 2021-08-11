@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.hw.dao.mysql.jdbc;
+package py.com.hw.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 import py.com.hw.dao.CategoriaDao;
 import py.com.hw.dao.Conexion;
 import py.com.hw.dao.util.SystemConstants;
-import py.com.hw.modelo.jdbc.Categoria;
+import py.com.hw.modelo.Categoria;
 
 /**
  *

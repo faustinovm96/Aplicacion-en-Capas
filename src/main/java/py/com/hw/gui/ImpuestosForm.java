@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import py.com.hw.dao.Conexion;
-import py.com.hw.modelo.jdbc.Impuesto;
+import py.com.hw.modelo.Impuesto;
 import py.com.hw.service.ImpuestoService;
 
 /**

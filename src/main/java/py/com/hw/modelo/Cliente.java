@@ -1,7 +1,13 @@
-package py.com.hw.modelo.jdbc;
+package py.com.hw.modelo;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Clase de dominio que mapea los datos de la entidad Cliente
@@ -9,11 +15,13 @@ import java.util.Objects;
  * @version 1.0
  * @author Faustino Villasboa Martínez
  */
+
 public class Cliente implements Serializable{
     
     private static final Long serialUID = 1L;
    
     private Integer id;
+    
     private String cedulaRUC;
     private String nombre;
     private String direccion;

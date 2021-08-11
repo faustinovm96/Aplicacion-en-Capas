@@ -6,7 +6,7 @@
 package py.com.hw.test;
 
 import py.com.hw.dao.ImpuestoDao;
-import py.com.hw.modelo.jdbc.Impuesto;
+import py.com.hw.modelo.Impuesto;
 import py.com.hw.service.ImpuestoService;
 
 /**

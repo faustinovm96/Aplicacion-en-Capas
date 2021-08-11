@@ -7,7 +7,7 @@ package py.com.hw.dao;
 
 import java.sql.SQLException;
 import java.util.List;
-import py.com.hw.modelo.jdbc.Impuesto;
+import py.com.hw.modelo.Impuesto;
 
 /**
  *

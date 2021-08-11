@@ -12,8 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import py.com.hw.dao.ArticuloDao;
 import py.com.hw.dao.Conexion;
-import py.com.hw.dao.mysql.jdbc.ArticuloDaoMySQLImpl;
-import py.com.hw.modelo.jdbc.Articulo;
+import py.com.hw.dao.mysql.ArticuloDaoMySQLImpl;
+import py.com.hw.modelo.Articulo;
 
 /**
  *

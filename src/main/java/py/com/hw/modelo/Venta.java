@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.hw.modelo.jdbc;
+package py.com.hw.modelo;
 
 import java.util.Date;
 

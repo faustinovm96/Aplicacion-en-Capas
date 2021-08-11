@@ -1,4 +1,4 @@
-package py.com.hw.dao.mysql.jdbc;
+package py.com.hw.dao.mysql;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.List;
 import py.com.hw.dao.ClienteDao;
 import py.com.hw.dao.util.SystemConstants;
 import py.com.hw.dao.Conexion;
-import py.com.hw.modelo.jdbc.Cliente;
+import py.com.hw.modelo.Cliente;
 
 
 /**

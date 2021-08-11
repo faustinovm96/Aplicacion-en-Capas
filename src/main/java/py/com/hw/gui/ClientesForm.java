@@ -14,7 +14,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import py.com.hw.dao.Conexion;
-import py.com.hw.modelo.jdbc.Cliente;
+import py.com.hw.modelo.Cliente;
 import py.com.hw.service.ClienteService;
 
 /**

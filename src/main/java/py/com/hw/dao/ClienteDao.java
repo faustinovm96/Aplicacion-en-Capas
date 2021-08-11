@@ -8,7 +8,7 @@ package py.com.hw.dao;
 import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.List;
-import py.com.hw.modelo.jdbc.Cliente;
+import py.com.hw.modelo.Cliente;
 
 /**
  *
