@@ -1,2 +1,2 @@
-#EJEMPLO DE CRUD JDBC
-Sistema de Ventas realizado en java con la librería Swing
+#Mini Aplicación en capas
+Aplicación en capas desarrollada por medio de Programación Orientada a Objetos, Patrones de Diseño y Buenas Prácticas
