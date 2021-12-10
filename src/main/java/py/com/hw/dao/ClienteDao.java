@@ -5,7 +5,7 @@
  */
 package py.com.hw.dao;
 
-import py.com.hw.modelo.Cliente;
+import py.com.hw.modelo.domain.Cliente;
 
 /**
  *

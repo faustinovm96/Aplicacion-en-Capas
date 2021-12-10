@@ -5,8 +5,8 @@
  */
 package py.com.hw.test;
 
-import py.com.hw.modelo.Cliente;
-import py.com.hw.service.ClienteService;
+import py.com.hw.modelo.domain.Cliente;
+import py.com.hw.modelo.service.ClienteService;
 
 /**
  *

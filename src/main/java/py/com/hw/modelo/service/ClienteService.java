@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package py.com.hw.service;
+package py.com.hw.modelo.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import py.com.hw.dao.ClienteDao;
 import py.com.hw.dao.Conexion;
 import py.com.hw.dao.mysql.ClienteDaoMySQLImple;
-import py.com.hw.modelo.Cliente;
+import py.com.hw.modelo.domain.Cliente;
 
 /**
  *

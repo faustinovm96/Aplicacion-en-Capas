@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import py.com.hw.dao.ClienteDao;
 import py.com.hw.dao.Conexion;
-import py.com.hw.modelo.Cliente;
+import py.com.hw.modelo.domain.Cliente;
 
 
 /**

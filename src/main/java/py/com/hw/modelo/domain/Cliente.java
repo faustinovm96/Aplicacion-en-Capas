@@ -1,4 +1,4 @@
-package py.com.hw.modelo;
+package py.com.hw.modelo.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
