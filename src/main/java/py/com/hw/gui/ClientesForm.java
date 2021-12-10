@@ -308,6 +308,7 @@ public class ClientesForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Algo ha salido horriblemente mal");
         }
         setIdObtenido(cliente.getId());
+        this.btnGuardar.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -329,6 +330,7 @@ public class ClientesForm extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Oh no");
         }
         llenarTabla();
+
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -379,8 +381,6 @@ public class ClientesForm extends javax.swing.JInternalFrame {
             ResultSet rs = null;
             //Conexion conn = new Conexion();
             Connection con = Conexion.getConnection();
-
-            ClienteService service = new ClienteService();
             
             String sql = "SELECT id_cliente, nombre, direccion, telefono, email FROM clientes";
             ps = con.prepareStatement(sql);
