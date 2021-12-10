@@ -44,7 +44,7 @@ public class Conexion {
 //        }
 //        return instance;
 //    }
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/test_1?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/fact?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASS = "holamundo96";
     private static BasicDataSource dataSource;

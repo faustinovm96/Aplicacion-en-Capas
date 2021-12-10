@@ -18,13 +18,6 @@ public class SystemConstants {
     public static final String USERNAME = "root";
     public static final String PASSWORD = "holamundo96";
     public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-
-    /**Queries SQL para la tabla clientes**/
-    public static final String INSERT_CLIENTE = "INSERT INTO clientes (cedularuc, nombre, direccion, telefono, email) VALUES (?,?,?,?,?)";
-    public static final String UPDATE_CLIENTE = "UPDATE clientes SET cedularuc=?, nombre=?, direccion=?, telefono=?, email=? WHERE id=?";
-    public static final String DELETE_CLIENTE = "DELETE FROM clientes WHERE id=?";
-    public static final String FIND_CLIENTE = "SELECT * FROM clientes WHERE id=?";
-    public static final String FINDALL_CLIENTES = "SELECT * FROM clientes";
     
     /**Queries SQL para la tabla categorias**/
     public static final String INSERT_CATEGORIA = "INSERT INTO categorias (categoria, descripcion) VALUES (?,?)";

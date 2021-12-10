@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author F996
  */
-public interface GenericDao<T,K> {
+interface GenericDao<T,K> {
     public int save(T g) throws SQLException;
     public int update(T g) throws SQLException;    
     public int delete(Integer g) throws SQLException;

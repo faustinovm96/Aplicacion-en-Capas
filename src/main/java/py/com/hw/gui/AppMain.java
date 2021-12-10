@@ -137,11 +137,7 @@ public class AppMain extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        ImpuestosForm impuesto = new ImpuestosForm();
-        impuesto.setBounds(10, 10, 1000, 300);
-        impuesto.setTitle("Impuesto");
-        impuesto.setVisible(true);
-        jDesktopPane1.add(impuesto);
+       
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -154,11 +150,7 @@ public class AppMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       CategoriasForm categoria = new CategoriasForm();
-       categoria.setBounds(10,10,1000,300);
-       categoria.setTitle("Categorias");
-       categoria.setVisible(true);
-       jDesktopPane1.add(categoria);
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
     
     /**

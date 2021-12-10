@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import py.com.hw.dao.ClienteDao;
-import py.com.hw.dao.util.SystemConstants;
 import py.com.hw.dao.Conexion;
 import py.com.hw.modelo.Cliente;
 
@@ -17,6 +16,13 @@ import py.com.hw.modelo.Cliente;
  * @author Faustino Villasboa Martínez
  */
 public class ClienteDaoMySQLImple implements ClienteDao {
+    
+    /**Queries SQL para la tabla clientes**/
+    public static final String INSERT_CLIENTE = "INSERT INTO clientes (cedula_ruc, nombre, direccion, telefono, email) VALUES (?,?,?,?,?)";
+    public static final String UPDATE_CLIENTE = "UPDATE clientes SET cedula_ruc=?, nombre=?, direccion=?, telefono=?, email=? WHERE id_cliente=?";
+    public static final String DELETE_CLIENTE = "DELETE FROM clientes WHERE id_cliente=?";
+    public static final String FIND_CLIENTE = "SELECT * FROM clientes WHERE id_cliente=?";
+    public static final String FINDALL_CLIENTES = "SELECT * FROM clientes";
 
     private Connection connTransactional;
 
@@ -31,12 +37,11 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     public int save(Cliente cliente) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
         
         try {
             connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
 
-            preparedStatement = connection.prepareStatement(SystemConstants.INSERT_CLIENTE);
+            preparedStatement = connection.prepareStatement(INSERT_CLIENTE);
             preparedStatement.setString(1, cliente.getCedulaRUC());
             preparedStatement.setString(2, cliente.getNombre());
             preparedStatement.setString(3, cliente.getDireccion());
@@ -45,7 +50,7 @@ public class ClienteDaoMySQLImple implements ClienteDao {
 
             return preparedStatement.executeUpdate();
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             preparedStatement.close();
@@ -60,10 +65,10 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     public int update(Cliente cliente) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        
         try {
             connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
-            preparedStatement = connection.prepareStatement(SystemConstants.UPDATE_CLIENTE);
+            preparedStatement = connection.prepareStatement(UPDATE_CLIENTE);
             preparedStatement.setString(1, cliente.getCedulaRUC());
             preparedStatement.setString(2, cliente.getNombre());
             preparedStatement.setString(3, cliente.getDireccion());
@@ -88,11 +93,11 @@ public class ClienteDaoMySQLImple implements ClienteDao {
     public int delete(Integer idCliente) throws SQLException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+       
         try {
             connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
 
-            preparedStatement = connection.prepareStatement(SystemConstants.DELETE_CLIENTE);
+            preparedStatement = connection.prepareStatement(DELETE_CLIENTE);
             preparedStatement.setInt(1, idCliente);
 
             return preparedStatement.executeUpdate();
@@ -114,14 +119,14 @@ public class ClienteDaoMySQLImple implements ClienteDao {
         try {
             connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
 
-            preparedStatement = connection.prepareStatement(SystemConstants.FINDALL_CLIENTES);
+            preparedStatement = connection.prepareStatement(FINDALL_CLIENTES);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 Cliente cliente = new Cliente();
-                cliente.setId(resultSet.getInt("id"));
+                cliente.setId(resultSet.getInt("id_cliente"));
                 cliente.setNombre(resultSet.getString("nombre"));
-                cliente.setCedulaRUC(resultSet.getString("cedularuc"));
+                cliente.setCedulaRUC(resultSet.getString("cedula_ruc"));
                 cliente.setDireccion(resultSet.getString("direccion"));
                 cliente.setTelefono(resultSet.getString("telefono"));
                 cliente.setEmail(resultSet.getString("email"));
@@ -145,14 +150,14 @@ public class ClienteDaoMySQLImple implements ClienteDao {
         try {
             connection = this.connTransactional != null ? this.connTransactional : Conexion.getConnection();
 
-            preparedStatement = connection.prepareStatement(SystemConstants.FIND_CLIENTE);
+            preparedStatement = connection.prepareStatement(FIND_CLIENTE);
             preparedStatement.setInt(1, idCliente);
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 cliente = new Cliente();
-                cliente.setId(resultSet.getInt("id"));
-                cliente.setNombre(resultSet.getString("cedularuc"));
+                cliente.setId(resultSet.getInt("id_cliente"));
+                cliente.setNombre(resultSet.getString("cedula_ruc"));
                 cliente.setCedulaRUC(resultSet.getString("nombre"));
                 cliente.setDireccion(resultSet.getString("direccion"));
                 cliente.setTelefono(resultSet.getString("telefono"));

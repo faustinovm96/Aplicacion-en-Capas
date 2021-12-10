@@ -382,7 +382,7 @@ public class ClientesForm extends javax.swing.JInternalFrame {
 
             ClienteService service = new ClienteService();
             
-            String sql = "SELECT id, nombre, direccion, telefono, email FROM clientes";
+            String sql = "SELECT id_cliente, nombre, direccion, telefono, email FROM clientes";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 

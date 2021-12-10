@@ -2,8 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>py.com.hw</groupId>
-    <artifactId>BackEnd-JDBC-JPA</artifactId>
-    <version>1.0</version>
+    <artifactId>Aplicacion-Capas-JDBC</artifactId>
+    <version>1.5</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -56,5 +56,5 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <name>BackEnd-JDBC-JPA</name>
+    <name>Aplicacion-Capas-JDBC</name>
 </project>
