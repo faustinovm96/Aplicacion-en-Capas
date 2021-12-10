@@ -1,5 +1,7 @@
 ## Aplicación en Capas
-Aplicación en capas desarrollada por medio de Programación Orientada a Objetos, Patrones de Diseño y Buenas Prácticas, utilizando Java y como motor de base de datos MySQL
+Aplicación en capas desarrollada utilizando Programación Orientada a Objetos, Patrones de Diseño y Buenas Prácticas, utilizando Java y como motor de base de datos MySQL
+
+Objetivo: Demostrar la utilización de capas lógicas para el desarrollo de software
 
 Herramientas utilizadas:
 
